@@ -8,22 +8,21 @@ from pymongo import MongoClient
 
 load_dotenv()
 
+
 # Ambil koneksi dari Streamlit Secrets saat online,
-# atau dari file .env saat dijalankan secara lokal.
+# atau dari .env saat dijalankan secara lokal.
 try:
     atlas_uri = st.secrets["ATLAS_URI"]
 except (KeyError, FileNotFoundError):
     atlas_uri = os.getenv("ATLAS_URI")
 
-MONGO_URI = atlas_uri or os.getenv(
-    "MONGO_URI", "mongodb://localhost:27017/"
-)
+if atlas_uri:
+    MONGO_URI = atlas_uri
+else:
+    MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
 
-MONGO_DB = os.getenv(
-    "MONGO_DB",
-    st.secrets.get("MONGO_DB", "bigdata_nosql")
-    if hasattr(st, "secrets")
-    else "bigdata_nosql"
+MONGO_DB = "bigdata_nosql"
+
 )
 
 st.set_page_config(
