@@ -19,8 +19,6 @@ except (KeyError, FileNotFoundError):
 MONGO_DB = "bigdata_nosql"
 
 
-)
-
 st.set_page_config(
     page_title="Dashboard Crawling Data MongoDB",
     page_icon="📊",
