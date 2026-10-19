@@ -8,22 +8,8 @@ from pymongo import MongoClient
 
 load_dotenv()
 
-
-
-# Ambil koneksi Atlas dari Streamlit Secrets
-try:
-    MONGO_URI = st.secrets["ATLAS_URI"]
-except (KeyError, FileNotFoundError):
-    MONGO_URI = os.getenv("ATLAS_URI") or os.getenv("MONGO_URI")
-
-MONGO_DB = "bigdata_nosql"
-
-
-st.set_page_config(
-    page_title="Dashboard Crawling Data MongoDB",
-    page_icon="📊",
-    layout="wide"
-)
+MONGO_URI = st.secrets["ATLAS_URI"]
+MONGO_DB = st.secrets.get("MONGO_DB", "bigdata_nosql")
 
 st.title("📊 Dashboard Crawling Data — MongoDB")
 st.caption("Visualisasi data Bronze Layer dan Silver Layer")
